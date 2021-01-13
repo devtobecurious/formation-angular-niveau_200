@@ -3,12 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-
+    "commit": "git add --all && cz",
     "build:staging": "ng build --configuration=staging",
-
     "prestart": "echo \" ah que coucou ! \" ",
     "start": "ng serve",
-
     "prebuild": "",
     "build": "ng build",
     "test": "ng test",
@@ -36,6 +34,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "commitizen": "^4.2.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.1.0",
