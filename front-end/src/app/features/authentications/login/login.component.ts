@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/shared/services/users/authentication.service';
-import { distinctUntilChanged, pairwise } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { distinctUntilChanged, pairwise, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject();
+
   user = undefined;
   loginForm!: FormGroup;
   subscriptions: Subscription[] = [];
@@ -24,14 +26,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(item => item.unsubscribe());
+    //this.subscriptions.forEach(item => item.unsubscribe());
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   ngOnInit(): void {
     const soub = this.loginForm.valueChanges
     .pipe(
       distinctUntilChanged(),
-      pairwise()
+      pairwise(),
+      takeUntil(this.destroy$)
     )
     .subscribe(item => {
       console.info('changes ?', item);
@@ -39,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     // soub.unsubscribe()
 
-    this.subscriptions.push(soub);
+    // this.subscriptions.push(soub);
   }
 
   connect(): void {
