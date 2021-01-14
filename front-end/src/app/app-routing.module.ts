@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./features/authentications/authentication.module').then(item => item.AuthenticationModule)
+  },
+  {
+    path: 'jouer',
+    loadChildren: () => import('./features/games/game.module').then(item => item.GameModule)
   }
 ];
 

@@ -3,12 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "document": "npx compodoc -p ./tsconfig.json",
     "commit": "git add --all && cz",
+
+    "prebuild:staging": "ng build starwars-jedi",
     "build:staging": "ng build --configuration=staging",
-    "prestart": "echo \" ah que coucou ! \" ",
+
+    "prestart": "ng build starwars-jedi",
     "start": "ng serve",
+
     "prebuild": "",
     "build": "ng build",
+    "postbuild": "npm run document",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -42,6 +48,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^11.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
