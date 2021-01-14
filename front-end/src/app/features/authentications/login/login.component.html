@@ -1,4 +1,6 @@
-<input type="text" class="login">
-<input type="text" class="password">
+<form [formGroup]="loginForm" (ngSubmit)="connect()">
+  <input type="text" class="login" formControlName="email">
+  <input type="text" class="password" formControlName="password">
 
-<button class="login" (click)="connect()">Se connecter</button>
+  <button class="login" [disabled]="!loginForm.valid">Se connecter</button>
+</form>

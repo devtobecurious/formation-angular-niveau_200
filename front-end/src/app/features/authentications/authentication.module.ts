@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AuthenticationService } from 'src/app/shared/services/users/authentication.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -10,7 +11,8 @@ import { AuthenticationService } from 'src/app/shared/services/users/authenticat
   declarations: [LoginComponent],
   imports: [
     CommonModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService
