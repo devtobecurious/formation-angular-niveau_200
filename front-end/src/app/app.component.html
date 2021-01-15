@@ -1,9 +1,14 @@
+<app-small-header></app-small-header>
+
 <h1>
-  Jeu Star wars
+  {{ title | lowercase | uppercase }}
 </h1>
 
 <a [routerLink]="['/login']" >Login</a>
 <a [routerLink]="['/jouer']" >Start game</a>
+
+<!-- <app-switchmap></app-switchmap> -->
+<!-- <app-coldhot></app-coldhot> -->
 
 <lib-starwars-jedi></lib-starwars-jedi>
 
