@@ -7,10 +7,10 @@ export class AuthenticationService {
 
   constructor() { }
 
-  login(user: User): Observable<{ token: string, name: string} | undefined> {
-    console.info('service', user);
+  login(user: User): Observable<User | undefined> {
+    console.info('service !', user);
 
-    return of({ token: '123', name: 'luke' });
+    return of({ token: '123', name: 'luke', password: '', email: '' });
   }
 }
 

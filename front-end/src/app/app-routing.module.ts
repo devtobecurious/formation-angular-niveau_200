@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthenticateGuard } from './shared/guards/authenticate.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'jouer',
-    loadChildren: () => import('./features/games/game.module').then(item => item.GameModule)
+    loadChildren: () => import('./features/games/game.module').then(item => item.GameModule),
+    canActivate: [ AuthenticateGuard ]
   }
 ];
 

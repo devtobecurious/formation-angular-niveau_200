@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/shared/services/users/authentication.service';
 import { distinctUntilChanged, pairwise, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
+import { ApplicationState } from 'src/app/store/reducers';
+import { Store } from '@ngrx/store';
+import { login } from '../store/actions/authentication.actions';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   subscriptions: Subscription[] = [];
 
-  constructor(private service: AuthenticationService,
+  constructor(private store: Store<ApplicationState>,
               private formBuilder: FormBuilder) {
 
       this.loginForm = this.formBuilder.group({
@@ -50,10 +53,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   connect(): void {
     console.info('submit', this.loginForm.value);
 
+    this.store.dispatch(login({ user: this.loginForm.value }));
+
     // user est null
-    this.service.login(this.loginForm.value).subscribe(item => {
-      // user n'est plus null
-      this.user = item;
-    });
+    // this.service.login(this.loginForm.value).subscribe(item => {
+    //   // user n'est plus null
+    //   this.user = item;
+    // });
   }
 }

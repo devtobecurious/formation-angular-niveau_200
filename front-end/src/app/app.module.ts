@@ -12,6 +12,9 @@ import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { CounterModule } from './features/tests/counters/counter.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthenticationEffect } from './features/authentications/store/effects/authentication.effects';
+import { AuthenticationService } from './shared/services/users/authentication.service';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,11 @@ import { CounterModule } from './features/tests/counters/counter.module';
       metaReducers
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AuthenticationEffect]),
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
